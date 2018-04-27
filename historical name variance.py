@@ -22,5 +22,15 @@ df2.columns = ['year','gender','count','sum']
 df2 = df2.merge(df,left_on=['gender','year','count'],right_on=['gender','year','count'],how='inner')
 df2['var'] = df2['count']/df2['sum']
 
-##df2.plot(x='year', y='count')
-##plt.show()
+plt.xlabel('Year')
+plt.ylabel('Percent of Population')
+
+df3 = df2[['year','gender','var']]
+df3 = df3.set_index('year')
+
+plt.annotate('Linda', xy=(1948,.0575), xytext=(1975,.07),
+             arrowprops=dict(facecolor='black', shrink=0.05),
+             )
+
+df3.groupby('gender')['var'].plot()
+plt.show()
